@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бабушка Рядышком — тепло рядом</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF6F0;
+    --warm: #F5EDE0;
+    --terracotta: #C4673A;
+    --terra-light: #E8896A;
+    --dark: #2C2016;
+    --mid: #7A5C3A;
+    --sage: #8AAF8A;
+    --sage-light: #C4DCC4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(250,246,240,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,103,58,0.12);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--terracotta);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--mid);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--terracotta);
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 50px;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--terra-light) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,103,58,0.08) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(138,175,138,0.12) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite reverse;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--sage-light);
+    color: #3D6B3D;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.12;
+    color: var(--dark);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--mid);
+    max-width: 460px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .btn-primary {
+    background: var(--terracotta);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(196,103,58,0.3);
+  }
+
+  .btn-primary:hover {
+    background: var(--terra-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(196,103,58,0.35);
+  }
+
+  .btn-outline {
+    border: 2px solid var(--terracotta);
+    color: var(--terracotta);
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    background: var(--terracotta);
+    color: white;
+  }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-card-stack {
+    position: relative;
+    width: 340px;
+    height: 420px;
+  }
+
+  .profile-card {
+    position: absolute;
+    background: white;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(44,32,22,0.12);
+    transition: transform 0.3s;
+  }
+
+  .profile-card:hover { transform: translateY(-4px); }
+
+  .card-grandma {
+    top: 0; left: 0;
+    width: 280px;
+    transform: rotate(-3deg);
+    border-left: 4px solid var(--terracotta);
+  }
+
+  .card-mama {
+    bottom: 0; right: 0;
+    width: 260px;
+    transform: rotate(2deg);
+    border-left: 4px solid var(--sage);
+  }
+
+  .card-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 14px;
+  }
+
+  .card-grandma .card-avatar { background: rgba(196,103,58,0.12); }
+  .card-mama .card-avatar { background: rgba(138,175,138,0.2); }
+
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  .card-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 50px;
+  }
+
+  .card-grandma .card-tag {
+    background: rgba(196,103,58,0.1);
+    color: var(--terracotta);
+  }
+
+  .card-mama .card-tag {
+    background: rgba(138,175,138,0.2);
+    color: #3D6B3D;
+  }
+
+  .connect-line {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 64px; height: 64px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 30px rgba(44,32,22,0.15);
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  /* STATS */
+  .stats {
+    background: var(--dark);
+    padding: 64px 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    text-align: center;
+  }
+
+  .stat-item { position: relative; }
+
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 20%;
+    height: 60%;
+    width: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--terra-light);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* HOW IT WORKS */
+  .section {
+    padding: 100px 48px;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    color: var(--mid);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 540px;
+    margin-bottom: 64px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: 60px; right: 60px;
+    height: 2px;
+    background: linear-gradient(to right, var(--terracotta), var(--sage));
+    z-index: 0;
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .step-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 20px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(44,32,22,0.1);
+    border: 3px solid var(--cream);
+    transition: transform 0.3s;
+  }
+
+  .step:hover .step-icon { transform: scale(1.1); }
+
+  .step-num {
+    position: absolute;
+    top: -6px; right: calc(50% - 42px);
+    width: 22px; height: 22px;
+    background: var(--terracotta);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* FOR WHOM */
+  .for-whom {
+    background: var(--warm);
+    padding: 100px 48px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 900px;
+  }
+
+  .whom-card {
+    background: white;
+    border-radius: 28px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .whom-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(44,32,22,0.12);
+  }
+
+  .whom-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+
+  .whom-card.grandma::before { background: linear-gradient(to right, var(--terracotta), var(--terra-light)); }
+  .whom-card.mama::before { background: linear-gradient(to right, var(--sage), var(--sage-light)); }
+
+  .whom-emoji { font-size: 3rem; margin-bottom: 20px; display: block; }
+
+  .whom-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .whom-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .whom-list li {
+    font-size: 0.92rem;
+    color: var(--mid);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .whom-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--terracotta);
+    font-size: 0.85rem;
+  }
+
+  .whom-card.mama .whom-list li::before { color: var(--sage); }
+
+  /* SAFETY */
+  .safety {
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .safety-features {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .safety-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 24px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 20px rgba(44,32,22,0.06);
+    transition: transform 0.3s;
+  }
+
+  .safety-item:hover { transform: translateX(6px); }
+
+  .safety-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: rgba(196,103,58,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .safety-text h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .safety-text p {
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    background: var(--dark);
+    padding: 100px 48px;
+  }
+
+  .testimonials .section-title { color: white; }
+  .testimonials .section-sub { color: rgba(255,255,255,0.5); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .testi-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 32px;
+    transition: background 0.3s;
+  }
+
+  .testi-card:hover { background: rgba(255,255,255,0.08); }
+
+  .testi-quote {
+    font-size: 2rem;
+    color: var(--terra-light);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .testi-text {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testi-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .testi-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: white;
+  }
+
+  .testi-role {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(196,103,58,0.08) 0%, transparent 70%);
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    max-width: 700px;
+    margin: 0 auto 24px;
+  }
+
+  .cta-section .section-sub {
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-note {
+    margin-top: 20px;
+    font-size: 0.82rem;
+    color: var(--mid);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--terra-light);
+  }
+
+  .footer-note {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 48px; }
+    .hero-visual { display: none; }
+    .stats { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px; }
+    .stat-item::after { display: none; }
+    .section, .for-whom, .testimonials, .cta-section { padding: 64px 24px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .steps::before { display: none; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .safety { grid-template-columns: 1fr; gap: 40px; padding: 64px 24px; }
+    .testi-grid { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Бабушка Рядышком</div>
+  <ul class="nav-links">
+    <li><a href="#how">Как работает</a></li>
+    <li><a href="#for-whom">Для кого</a></li>
+    <li><a href="#safety">Безопасность</a></li>
+    <li><a href="#join" class="nav-cta">Присоединиться</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-badge">🌱 Новый социальный проект «Бабушка Рядышком»</span>
+    <h1>Тепло —<br>в двух шагах<br>от <em>вашего дома</em></h1>
+    <p class="hero-sub">Соединяем молодых мам, которым нужна помощь, с женщинами, чьё сердце готово любить — как бабушка.</p>
+    <div class="hero-buttons">
+      <a href="#join" class="btn-primary">Я хочу помочь</a>
+      <a href="#join" class="btn-outline">Мне нужна помощь</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="profile-card card-grandma">
+        <div class="card-avatar">👵</div>
+        <div class="card-name">Нина Павловна, 63</div>
+        <div class="card-desc">Дети выросли, внуков пока нет. Обожает детей и хочет быть нужной.</div>
+        <span class="card-tag">✦ Бабушка рядом</span>
+      </div>
+
+      <div class="connect-line">🤝</div>
+
+      <div class="profile-card card-mama">
+        <div class="card-avatar">👩</div>
+        <div class="card-name">Анна, 29</div>
+        <div class="card-desc">Одна с малышом, нет ни минуты для себя. Устала.</div>
+        <span class="card-tag">✦ Мама в декрете</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat-item reveal">
+    <span class="stat-num">1 из 3</span>
+    <span class="stat-label">мамы в декрете<br>чувствуют себя одинокими</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-num">40%</span>
+    <span class="stat-label">женщин 55+ живут<br>без внуков рядом</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-num">0 ₽</span>
+    <span class="stat-label">сервис работает<br>на взаимопомощи</span>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <span class="section-label reveal">Как работает</span>
+  <h2 class="section-title reveal">Четыре шага<br>до тепла рядом</h2>
+  <p class="section-sub reveal">Никакой сложной регистрации. Только живые люди, которые хотят помогать и получать помощь.</p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-icon">📝<span class="step-num">1</span></div>
+      <h3>Регистрация</h3>
+      <p>Укажите район, возраст ребёнка или свободное время — за 3 минуты.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-icon">🔍<span class="step-num">2</span></div>
+      <h3>Матчинг</h3>
+      <p>Система находит подходящую пару рядом с вашим домом.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-icon">💬<span class="step-num">3</span></div>
+      <h3>Знакомство</h3>
+      <p>Поговорите в чате, договоритесь о первой встрече — комфортно и безопасно.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-icon">❤️<span class="step-num">4</span></div>
+      <h3>Тепло рядом</h3>
+      <p>Первый визит, а дальше — ваши отношения, как вам нравится.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="for-whom" id="for-whom">
+  <span class="section-label reveal">Для кого</span>
+  <h2 class="section-title reveal">Два сердца,<br>одно решение</h2>
+  <p class="section-sub reveal">Сервис создан для двух совершенно разных людей с одной общей потребностью — быть нужными.</p>
+
+  <div class="cards-grid">
+    <div class="whom-card grandma reveal">
+      <span class="whom-emoji">👵</span>
+      <h3>Бабушка по желанию</h3>
+      <ul class="whom-list">
+        <li>Вы любите детей и скучаете по этому ощущению</li>
+        <li>Ваши дети выросли, внуков пока нет или они далеко</li>
+        <li>Вы хотите быть нужной и делиться опытом</li>
+        <li>У вас есть время и большое сердце</li>
+      </ul>
+    </div>
+
+    <div class="whom-card mama reveal">
+      <span class="whom-emoji">👩‍👶</span>
+      <h3>Мама в декрете</h3>
+      <ul class="whom-list">
+        <li>Вы одна с малышом и устаёте</li>
+        <li>Родственники далеко или не могут помочь</li>
+        <li>Вам нужен хотя бы час тишины и для себя</li>
+        <li>Вы хотите тёплого, надёжного человека рядом</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="safety" id="safety">
+  <div>
+    <span class="section-label reveal">Безопасность</span>
+    <h2 class="section-title reveal">Каждый шаг —<br>под защитой</h2>
+    <p class="section-sub reveal">Мы понимаем, что речь идёт о самом дорогом. Поэтому безопасность — наш приоритет номер один.</p>
+  </div>
+
+  <div class="safety-features">
+    <div class="safety-item reveal">
+      <div class="safety-icon">✅</div>
+      <div class="safety-text">
+        <h4>Верификация личности</h4>
+        <p>Проверка через номер телефона и фото. Каждый профиль проходит модерацию перед активацией.</p>
+      </div>
+    </div>
+    <div class="safety-item reveal">
+      <div class="safety-icon">⭐</div>
+      <div class="safety-text">
+        <h4>Рейтинг и отзывы</h4>
+        <p>После каждой встречи обе стороны оставляют отзыв. Репутация видна сразу.</p>
+      </div>
+    </div>
+    <div class="safety-item reveal">
+      <div class="safety-icon">💬</div>
+      <div class="safety-text">
+        <h4>Безопасный чат</h4>
+        <p>Общайтесь внутри платформы — номера телефонов не передаются до вашего решения.</p>
+      </div>
+    </div>
+    <div class="safety-item reveal">
+      <div class="safety-icon">🛡️</div>
+      <div class="safety-text">
+        <h4>Поддержка 24/7</h4>
+        <p>Команда всегда на связи. Любой вопрос или тревога — мы рядом.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <span class="section-label reveal" style="color: var(--terra-light);">Истории</span>
+  <h2 class="section-title reveal">Они уже нашли<br>друг друга</h2>
+  <p class="section-sub reveal">Реальные истории из пилотного запуска в Москве.</p>
+
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Я думала, что мне нужна просто няня. Но Галина Николаевна стала для нас семьёй. Она приходит три раза в неделю и Артём уже называет её бабуля.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: rgba(138,175,138,0.2);">👩</div>
+        <div>
+          <div class="testi-name">Марина, 27</div>
+          <div class="testi-role">Мама в декрете, Москва</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">После выхода на пенсию я чувствовала себя ненужной. А теперь у меня есть маленький Тима, который ждёт меня каждый четверг. Это моё счастье.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: rgba(196,103,58,0.15);">👵</div>
+        <div>
+          <div class="testi-name">Нина Павловна, 64</div>
+          <div class="testi-role">Бабушка по желанию, Москва</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Сначала боялась, что это странно — доверить ребёнка чужому человеку. Но уже после первой встречи с Людмилой Ивановной всё страхи прошли. Она просто светится рядом с детьми.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: rgba(138,175,138,0.2);">👩</div>
+        <div>
+          <div class="testi-name">Катя, 31</div>
+          <div class="testi-role">Мама двойняшек, Подмосковье</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="join">
+  <span class="section-label reveal">Начать</span>
+  <h2 class="section-title reveal">Тепло — в двух<br>шагах от вас</h2>
+  <p class="section-sub reveal">Присоединяйтесь к сообществу. Это бесплатно, это рядом и это меняет жизнь.</p>
+  <div class="cta-buttons reveal">
+    <button class="btn-primary" onclick="alert('Спасибо! Скоро мы вам напишем 💛')">Я хочу стать бабушкой рядышком</button>
+    <button class="btn-outline" onclick="alert('Спасибо! Скоро мы вам напишем 💛')">Мне нужна помощь</button>
+  </div>
+  <p class="cta-note reveal">Уже 1 200+ человек в листе ожидания · Запуск в 5 городах России</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Бабушка Рядышком</div>
+  <div class="footer-note">© 2024 Бабушка Рядышком · Сделано с любовью · Для тех, кто рядом</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
